@@ -1,0 +1,19 @@
+https://stackoverflow.com/questions/38709923/why-is-requestanimationframe-better-than-setinterval-or-settimeout
+
+High quality animation.
+The question is most simply answered with. requestAnimationFrame produces higher quality animation completely eliminating flicker
+ and shear that can happen when using setTimeout or setInterval, and reduce or completely remove frame skips.
+
+Shear
+is when a new canvas buffer is presented to the display buffer midway through the display scan resulting in a shear line caused by
+the mismatched animation positions.
+
+Flicker
+is caused when the canvas buffer is presented to the display buffer before the canvas has been fully rendered.
+
+Frame skip
+is caused when the time between rendering frames is not in precise sync with the display hardware. Every so many frames a frame
+will be skipped producing inconsistent animation. (There are method to reduce this but personally I think these methods produce
+worse overall results) As most devices use 60 frames per second (or multiple of) resulting in a new frame every 16.666...ms and
+the timers setTimeout and setInterval use integers values they can never perfectly match the framerate (rounding up to 17ms if
+you have interval = 1000/60)
